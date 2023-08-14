@@ -1,0 +1,37 @@
+version: '3.8'
+
+networks:
+  kim_message_pipeline_net:
+    driver: bridge
+
+volumes:
+  kim_message_pipeline_persistence__redis:
+
+# volumes:
+  # dia_fr_dev_persistence_elasticsearch:
+  # dia_fr_prod_persistence_elastic:
+  # dia_fr_prod_persistence_minio:
+  # dia_fr_prod_persistence_mysql:
+  # dia_fr_prod_persistence_redis:
+
+services:
+  kafka:
+    extends:
+      file: kafka/docker-compose.yaml
+      service: kafka
+    restart: always
+
+  kafdrop:
+    extends:
+      file: kafka/docker-compose.yaml
+      service: kafdrop
+    restart: always
+
+  redis:
+    extends:
+      file: redis/docker-compose.yaml
+      service: redis
+    restart: always
+
+
+  

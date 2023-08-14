@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  kim_message_pipeline_net:
+    driver: bridge
+
+volumes:
+  kim_message_pipeline_persistence__redis:
+
+services:
+  redis:
+    image: redis:latest
+    container_name: my-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - kim_message_pipeline_persistence__redis:/data
+    command: redis-server --appendonly yes
+    networks: 
+      - kim_message_pipeline_net
+
